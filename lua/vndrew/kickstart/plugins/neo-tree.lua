@@ -2,7 +2,7 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 --
 local function init()
-  require("neo-tree").setup({
+  require('neo-tree').setup {
     filesystem = {
       window = {
         mappings = {
@@ -10,7 +10,7 @@ local function init()
         },
       },
     },
-  })
+  }
 
   local map = function(keys, func, desc)
     vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'Neotree: ' .. desc })
@@ -23,6 +23,5 @@ local function init()
 end
 
 return {
-  init = init
+  init = init,
 }
-
