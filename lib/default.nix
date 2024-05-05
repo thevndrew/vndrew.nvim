@@ -30,15 +30,6 @@ in rec {
     pkgs = legacyPackages.${system};
     vndrew-nvim = mkVimPlugin {inherit system;};
   in [
-    # languages
-    vimPlugins.nvim-lspconfig
-    vimPlugins.nvim-treesitter.withAllGrammars
-    vimPlugins.vim-just
-
-    # telescope
-    vimPlugins.plenary-nvim
-    vimPlugins.telescope-nvim
-
     vimPlugins.cmp_luasnip
     vimPlugins.cmp-nvim-lsp
     vimPlugins.cmp-path
@@ -53,20 +44,26 @@ in rec {
     vimPlugins.luasnip
     vimPlugins.mini-nvim
     vimPlugins.neodev-nvim
+    vimPlugins.nui-nvim
     vimPlugins.nvim-cmp
     vimPlugins.nvim-dap
     vimPlugins.nvim-dap-go
     vimPlugins.nvim-dap-ui
     vimPlugins.nvim-lint
+    vimPlugins.nvim-lspconfig
     vimPlugins.nvim-nio
+    vimPlugins.nvim-treesitter-context
+    vimPlugins.nvim-treesitter.withAllGrammars
     vimPlugins.nvim-web-devicons # figure out how to enable nerd
+    vimPlugins.plenary-nvim
     vimPlugins.telescope-fzf-native-nvim
+    vimPlugins.telescope-nvim
     vimPlugins.telescope-ui-select-nvim
     vimPlugins.todo-comments-nvim
     vimPlugins.trouble-nvim
+    vimPlugins.vim-just
     vimPlugins.vim-sleuth
     vimPlugins.which-key-nvim
-    vimPlugins.nui-nvim
 
     # configuration
     vndrew-nvim
