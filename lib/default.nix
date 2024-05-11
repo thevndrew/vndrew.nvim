@@ -26,12 +26,11 @@ in rec {
 
   mkNeovimPlugins = {system}:
   let
-    inherit (pkgs) vimPlugins luajitPackages;
+    inherit (pkgs) vimPlugins;
     pkgs = legacyPackages.${system};
     vndrew-nvim = mkVimPlugin {inherit system;};
   in [
     vimPlugins.cmp_luasnip
-    luajitPackages.jsregexp
     vimPlugins.cmp-nvim-lsp
     vimPlugins.cmp-path
     vimPlugins.colorbuddy-nvim
@@ -95,6 +94,18 @@ in rec {
     #python3Packages.black
   ];
 
+  mkExtraLuaPackages = {system}: let
+    inherit (pkgs) lua54Packages luajitPackages;
+    pkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  in [
+    # luasnip dep
+    lua54Packages.jsregexp
+    #luajitPackages.jsregexp
+  ];
+
   mkExtraConfig = ''
     lua << EOF
       require 'vndrew'.init()
@@ -119,11 +130,20 @@ in rec {
     };
 
   mkHomeManager = {system}: let
+    inherit (pkgs) lib;
+    pkgs = legacyPackages.${system};
     extraConfig = mkExtraConfig;
     extraPackages = mkExtraPackages {inherit system;};
+    extraLuaPackages = mkExtraLuaPackages {inherit system;};
     plugins = mkNeovimPlugins {inherit system;};
   in {
     inherit extraConfig extraPackages plugins;
+    #extraWrapperArgs = [
+    #  "--suffix"
+    #  "LIBRARY_PATH"
+    #  ":"
+    #  "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp"
+    #];
     defaultEditor = true;
     enable = true;
     withNodeJs = true;
