@@ -1,21 +1,25 @@
 -- [[ Configure plugins ]]
-local plugin_dir = 'vndrew/plugins'
-require(plugin_dir .. '/cmp')
-require(plugin_dir .. '/colorbuddy')
-require(plugin_dir .. '/comment')
-require(plugin_dir .. '/conform')
-require(plugin_dir .. '/debug')
-require(plugin_dir .. '/gitsigns')
-require(plugin_dir .. '/indent_line')
-require(plugin_dir .. '/lint')
-require(plugin_dir .. '/lspconfig')
-require(plugin_dir .. '/mini')
-require(plugin_dir .. '/telescope')
-require(plugin_dir .. '/todo-comments')
-require(plugin_dir .. '/treesitter')
-require(plugin_dir .. '/which-key')
--- require 'vndrew/kickstart.plugins.neo-tree'
--- require 'vndrew/kickstart/plugins/tokyonight'
+local function configure(plugin)
+  require('vndrew/plugins/' .. plugin)
+end
+
+configure 'cmp'
+configure 'colorbuddy'
+configure 'comment'
+configure 'conform'
+configure 'debug'
+configure 'gitsigns'
+configure 'indent_line'
+configure 'lint'
+configure 'lspconfig'
+configure 'mini'
+configure 'telescope'
+configure 'todo-comments'
+configure 'treesitter'
+configure 'which-key'
+
+-- configure 'neo-tree'
+-- configure 'tokyonight'
 
 -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 --    This is the easiest way to modularize your config.
