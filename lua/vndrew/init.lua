@@ -101,7 +101,7 @@ local function init()
   require 'vndrew.keymaps'
 
   -- [[ Configure ]]
-  require('vndrew.plugins').init()
+  require 'vndrew.plugins'
 end
 
 return {

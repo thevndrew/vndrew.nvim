@@ -1,27 +1,21 @@
 -- [[ Configure plugins ]]
-
-local function init()
-  require('vndrew/kickstart/plugins/cmp').init()
-  require('vndrew/kickstart/plugins/colorbuddy').init()
-  require('vndrew/kickstart/plugins/comment').init()
-  require('vndrew/kickstart/plugins/conform').init()
-  require('vndrew/kickstart/plugins/debug').init()
-  require('vndrew/kickstart/plugins/gitsigns').init()
-  require('vndrew/kickstart/plugins/indent_line').init()
-  require('vndrew/kickstart/plugins/lint').init()
-  require('vndrew/kickstart/plugins/lspconfig').init()
-  require('vndrew/kickstart/plugins/mini').init()
-  require('vndrew/kickstart/plugins/telescope').init()
-  require('vndrew/kickstart/plugins/todo-comments').init()
-  require('vndrew/kickstart/plugins/treesitter').init()
-  require('vndrew/kickstart/plugins/which-key').init()
-  -- require 'vndrew/kickstart.plugins.neo-tree'.init()
-  -- require 'vndrew/kickstart/plugins/tokyonight'.init()
-end
-
-return {
-  init = init,
-}
+local plugin_dir = 'vndrew/plugins'
+require(plugin_dir .. '/cmp')
+require(plugin_dir .. '/colorbuddy')
+require(plugin_dir .. '/comment')
+require(plugin_dir .. '/conform')
+require(plugin_dir .. '/debug')
+require(plugin_dir .. '/gitsigns')
+require(plugin_dir .. '/indent_line')
+require(plugin_dir .. '/lint')
+require(plugin_dir .. '/lspconfig')
+require(plugin_dir .. '/mini')
+require(plugin_dir .. '/telescope')
+require(plugin_dir .. '/todo-comments')
+require(plugin_dir .. '/treesitter')
+require(plugin_dir .. '/which-key')
+-- require 'vndrew/kickstart.plugins.neo-tree'
+-- require 'vndrew/kickstart/plugins/tokyonight'
 
 -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 --    This is the easiest way to modularize your config.

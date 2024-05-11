@@ -26,11 +26,12 @@ in rec {
 
   mkNeovimPlugins = {system}:
   let
-    inherit (pkgs) vimPlugins;
+    inherit (pkgs) vimPlugins luajitPackages;
     pkgs = legacyPackages.${system};
     vndrew-nvim = mkVimPlugin {inherit system;};
   in [
     vimPlugins.cmp_luasnip
+    luajitPackages.jsregexp
     vimPlugins.cmp-nvim-lsp
     vimPlugins.cmp-path
     vimPlugins.colorbuddy-nvim
@@ -85,8 +86,6 @@ in rec {
     #nodePackages."yaml-language-server"
     #pkgs.gopls
     pkgs.lua-language-server
-
-    pkgs.luajitPackages.jsregexp
 
     # formatters
     pkgs.alejandra
