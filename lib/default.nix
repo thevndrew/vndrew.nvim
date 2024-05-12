@@ -85,6 +85,8 @@ in rec {
     #nodePackages."yaml-language-server"
     #pkgs.gopls
     pkgs.lua-language-server
+    pkgs.nil
+    #luajitPackages.lua-lsp
 
     # formatters
     pkgs.alejandra
