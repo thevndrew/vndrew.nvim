@@ -95,13 +95,13 @@ local function init()
   vim.g.have_nerd_font = true
 
   -- [[ Setting options ]]
-  require 'vndrew.options'
+  require 'options'
 
   -- [[ Basic Keymaps ]]
-  require 'vndrew.keymaps'
+  require 'keymaps'
 
   -- [[ Configure ]]
-  require 'vndrew.plugins'
+  require 'plugins'
 end
 
 return {

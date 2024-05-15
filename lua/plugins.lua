@@ -1,6 +1,6 @@
 -- [[ Configure plugins ]]
 local function configure(plugin)
-  require('vndrew/plugins/' .. plugin)
+  require('plugins/' .. plugin)
 end
 
 configure 'cmp'

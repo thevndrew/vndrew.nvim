@@ -105,7 +105,6 @@ in rec {
   in [
     # luasnip dep
     lua54Packages.jsregexp
-    #luajitPackages.jsregexp
   ];
 
   mkExtraConfig = ''
@@ -140,12 +139,12 @@ in rec {
     plugins = mkNeovimPlugins {inherit system;};
   in {
     inherit extraConfig extraPackages plugins;
-    #extraWrapperArgs = [
-    #  "--suffix"
-    #  "LIBRARY_PATH"
-    #  ":"
-    #  "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp"
-    #];
+    extraWrapperArgs = [
+      "--suffix"
+      "LUA_CPATH"
+      ":"
+      "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp/core.so"
+    ];
     defaultEditor = true;
     enable = true;
     withNodeJs = true;

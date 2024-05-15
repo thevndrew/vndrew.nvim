@@ -1,1 +1,1 @@
-require 'vndrew'.init()
+require('vndrew').init()
