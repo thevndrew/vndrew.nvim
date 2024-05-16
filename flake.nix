@@ -3,6 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    express_line-nvim = {
+      url = "github:tjdevries/express_line.nvim";
+      flake = false;
+    };
+
+    telescope-smart-history-nvim = {
+      url = "github:nvim-telescope/telescope-smart-history.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {

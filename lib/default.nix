@@ -27,43 +27,73 @@ in rec {
   mkNeovimPlugins = {system}:
   let
     inherit (pkgs) vimPlugins;
+    inherit (pkgs.vimUtils) buildVimPlugin;
     pkgs = legacyPackages.${system};
     vndrew-nvim = mkVimPlugin {inherit system;};
-  in [
-    vimPlugins.cmp_luasnip
-    vimPlugins.cmp-nvim-lsp
-    vimPlugins.cmp-path
-    vimPlugins.colorbuddy-nvim
-    vimPlugins.comment-nvim
-    vimPlugins.conform-nvim
-    vimPlugins.fidget-nvim
-    vimPlugins.friendly-snippets
-    vimPlugins.gitsigns-nvim
-    vimPlugins.indent-blankline-nvim
-    vimPlugins.lualine-nvim
-    vimPlugins.luasnip
-    vimPlugins.mini-nvim
-    vimPlugins.neodev-nvim
-    vimPlugins.nui-nvim
-    vimPlugins.nvim-cmp
-    vimPlugins.nvim-dap
-    vimPlugins.nvim-dap-go
-    vimPlugins.nvim-dap-ui
-    vimPlugins.nvim-lint
-    vimPlugins.nvim-lspconfig
-    vimPlugins.nvim-nio
-    vimPlugins.nvim-treesitter-context
-    vimPlugins.nvim-treesitter.withAllGrammars
-    vimPlugins.nvim-web-devicons # figure out how to enable nerd
-    vimPlugins.plenary-nvim
-    vimPlugins.telescope-fzf-native-nvim
-    vimPlugins.telescope-nvim
-    vimPlugins.telescope-ui-select-nvim
-    vimPlugins.todo-comments-nvim
-    vimPlugins.trouble-nvim
-    vimPlugins.vim-just
-    vimPlugins.vim-sleuth
-    vimPlugins.which-key-nvim
+
+    express_line-nvim = buildVimPlugin {
+      pname = "express_line.nvim";
+      version = "2024-05-16";
+      src = inputs.express_line-nvim;
+      meta.homepage = "https://github.com/tjdevries/express_line.nvim";
+    };
+
+    telescope-smart-history-nvim = buildVimPlugin {
+      pname = "telescope-smart-history.nvim";
+      version = "2024-05-16";
+      src = inputs.telescope-smart-history-nvim;
+      meta.homepage = "https://github.com/nvim-telescope/telescope-smart-history.nvim";
+    };
+
+  in with vimPlugins; [
+    telescope-smart-history-nvim
+    express_line-nvim
+
+    cmp-buffer
+    cmp_luasnip
+    cmp-nvim-lsp
+    cmp-path
+    colorbuddy-nvim
+    comment-nvim
+    conform-nvim
+    fidget-nvim
+    friendly-snippets
+    gitsigns-nvim
+    harpoon2
+    indent-blankline-nvim
+    lspkind-nvim
+    lualine-nvim
+    luasnip
+    mini-nvim
+    neodev-nvim
+    nui-nvim
+    nvim-cmp
+    nvim-dap
+    nvim-dap-go
+    nvim-dap-ui
+    nvim-dap-virtual-text
+    nvim-dbee
+    nvim-lint
+    nvim-lspconfig
+    nvim-nio
+    nvim-treesitter-context
+    nvim-treesitter.withAllGrammars
+    nvim-web-devicons # figure out how to enable nerd
+    oil-nvim
+    plenary-nvim
+    SchemaStore-nvim
+    sqlite-lua
+    telescope-fzf-native-nvim
+    telescope-nvim
+    telescope-ui-select-nvim
+    todo-comments-nvim
+    trouble-nvim
+    vim-dadbod
+    vim-dadbod-completion
+    vim-dadbod-ui
+    vim-just
+    vim-sleuth
+    which-key-nvim
 
     # configuration
     vndrew-nvim
@@ -124,7 +154,7 @@ in rec {
         customRC = mkExtraConfig;
         packages.main = {inherit start;};
       };
-      extraMakeWrapperArgs = ''--suffix PATH : "${lib.makeBinPath extraPackages}"'';
+      #extraMakeWrapperArgs = ''--suffix PATH : "${lib.makeBinPath extraPackages}"'';
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
