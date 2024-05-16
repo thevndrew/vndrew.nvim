@@ -3,11 +3,6 @@
 
 local set = vim.keymap.set
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
--- vim.g.mapleader = ","
--- vim.g.maplocalleader = ","
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --

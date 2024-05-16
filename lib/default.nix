@@ -109,7 +109,7 @@ in rec {
 
   mkExtraConfig = ''
     lua << EOF
-      require 'vndrew'.init()
+      require('vndrew').init()
     EOF
   '';
 
@@ -139,12 +139,20 @@ in rec {
     plugins = mkNeovimPlugins {inherit system;};
   in {
     inherit extraConfig extraPackages plugins;
-    extraWrapperArgs = [
-      "--suffix"
-      "LUA_CPATH"
-      ":"
-      "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp/core.so"
-    ];
+    #extraWrapperArgs = [
+    #  "--suffix"
+    #  "LUA_CPATH"
+    #  ":"
+    #  "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp/core.so"
+    #  "--suffix"
+    #  "LUA_CPATH"
+    #  ":"
+    #  "/home/andrew/.config/nvim/jsregexp.so"
+    #  "--suffix"
+    #  "LUA_PATH"
+    #  ":"
+    #  "${lib.makeLibraryPath extraLuaPackages}/../share/lua/5.4/jsregexp.lua"
+    #];
     defaultEditor = true;
     enable = true;
     withNodeJs = true;

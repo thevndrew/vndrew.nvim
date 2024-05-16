@@ -59,7 +59,6 @@ function M.glob_require(package)
     -- skip `init` and files starting with underscore.
     local basename = M.basename(modulename)
     if basename ~= "init" and basename:sub(1, 1) ~= "_" then
-      print(modulename)
       require(modulename)
     end
   end
