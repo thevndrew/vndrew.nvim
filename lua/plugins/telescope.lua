@@ -20,7 +20,7 @@
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
--- local data = assert(vim.fn.stdpath "data") --[[@as string]]
+local data = assert(vim.fn.stdpath "data") --[[@as string]]
 require("telescope").setup {
   -- You can put your default mappings / updates / etc. in here
   --  All the info you're looking for is in `:help telescope.setup()`
@@ -34,7 +34,7 @@ require("telescope").setup {
   extensions = {
     fzf = {},
     history = {
-      path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+      path = data .. "/telescope_history.sqlite3",
       limit = 100,
     },
     wrap_results = true,
@@ -43,7 +43,7 @@ require("telescope").setup {
     },
   },
 }
---print("Telescope history path: " .. data .. "telescope_history.sqlite3")
+-- print("Telescope history path: " .. data .. "/telescope_history.sqlite3")
 
 -- Enable Telescope extensions if they are installed
 pcall(require("telescope").load_extension, "fzf")

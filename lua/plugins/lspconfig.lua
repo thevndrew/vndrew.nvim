@@ -231,7 +231,7 @@ local servers = {
     settings = {
       ["nil"] = {
         formatting = {
-          command = { "nixpkgs-fmt" },
+          command = { "alejandra" },
         },
       },
     },

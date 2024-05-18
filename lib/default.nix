@@ -78,7 +78,10 @@ in rec {
       oil-nvim
       plenary-nvim
       SchemaStore-nvim
-      sqlite-lua
+      {
+        plugin = sqlite-lua;
+        config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+      }
       telescope-fzf-native-nvim
       telescope-nvim
       telescope-ui-select-nvim
@@ -119,10 +122,13 @@ in rec {
     #pkgs.gofumpt
     #pkgs.golines
     #python3Packages.black
+
+    # telescope-smart-history dep
+    pkgs.sqlite
   ];
 
   mkExtraLuaPackages = {system}: let
-    inherit (pkgs) lua54Packages luajitPackages;
+    inherit (pkgs) lua54Packages;
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -139,7 +145,7 @@ in rec {
   '';
 
   mkNeovim = {system}: let
-    inherit (pkgs) lib neovim;
+    inherit (pkgs) neovim;
     extraPackages = mkExtraPackages {inherit system;};
     pkgs = legacyPackages.${system};
     start = mkNeovimPlugins {inherit system;};
@@ -149,35 +155,17 @@ in rec {
         customRC = mkExtraConfig;
         packages.main = {inherit start;};
       };
-      #extraMakeWrapperArgs = ''--suffix PATH : "${lib.makeBinPath extraPackages}"'';
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
     };
 
   mkHomeManager = {system}: let
-    inherit (pkgs) lib;
-    pkgs = legacyPackages.${system};
     extraConfig = mkExtraConfig;
     extraPackages = mkExtraPackages {inherit system;};
-    extraLuaPackages = mkExtraLuaPackages {inherit system;};
     plugins = mkNeovimPlugins {inherit system;};
   in {
     inherit extraConfig extraPackages plugins;
-    #extraWrapperArgs = [
-    #  "--suffix"
-    #  "LUA_CPATH"
-    #  ":"
-    #  "${lib.makeLibraryPath extraLuaPackages}/lua/5.4/jsregexp/core.so"
-    #  "--suffix"
-    #  "LUA_CPATH"
-    #  ":"
-    #  "/home/andrew/.config/nvim/jsregexp.so"
-    #  "--suffix"
-    #  "LUA_PATH"
-    #  ":"
-    #  "${lib.makeLibraryPath extraLuaPackages}/../share/lua/5.4/jsregexp.lua"
-    #];
     defaultEditor = true;
     enable = true;
     withNodeJs = true;
