@@ -20,6 +20,7 @@
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- local data = assert(vim.fn.stdpath "data") --[[@as string]]
 require("telescope").setup {
   -- You can put your default mappings / updates / etc. in here
   --  All the info you're looking for is in `:help telescope.setup()`
@@ -31,15 +32,23 @@ require("telescope").setup {
   -- },
   -- pickers = {}
   extensions = {
+    fzf = {},
+    history = {
+      path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+      limit = 100,
+    },
+    wrap_results = true,
     ["ui-select"] = {
       require("telescope.themes").get_dropdown(),
     },
   },
 }
+--print("Telescope history path: " .. data .. "telescope_history.sqlite3")
 
 -- Enable Telescope extensions if they are installed
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "ui-select")
+pcall(require("telescope").load_extension, "smart_history")
 
 -- See `:help telescope.builtin`
 local builtin = require "telescope.builtin"
@@ -76,5 +85,3 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
   builtin.find_files { cwd = vim.fn.stdpath "config" }
 end, { desc = "[S]earch [N]eovim files" })
-
--- vim: ts=2 sts=2 sw=2 et

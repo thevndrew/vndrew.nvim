@@ -1,10 +1,7 @@
-{ inputs }:
-let
+{inputs}: let
   inherit (inputs.nixpkgs) legacyPackages;
 in rec {
-
-  mkVimPlugin = {system}:
-  let
+  mkVimPlugin = {system}: let
     inherit (pkgs) vimUtils;
     inherit (vimUtils) buildVimPlugin;
     pkgs = legacyPackages.${system};
@@ -24,8 +21,7 @@ in rec {
       src = ../.;
     };
 
-  mkNeovimPlugins = {system}:
-  let
+  mkNeovimPlugins = {system}: let
     inherit (pkgs) vimPlugins;
     inherit (pkgs.vimUtils) buildVimPlugin;
     pkgs = legacyPackages.${system};
@@ -44,60 +40,60 @@ in rec {
       src = inputs.telescope-smart-history-nvim;
       meta.homepage = "https://github.com/nvim-telescope/telescope-smart-history.nvim";
     };
+  in
+    with vimPlugins; [
+      telescope-smart-history-nvim
+      express_line-nvim
 
-  in with vimPlugins; [
-    telescope-smart-history-nvim
-    express_line-nvim
+      cmp-buffer
+      cmp_luasnip
+      cmp-nvim-lsp
+      cmp-path
+      colorbuddy-nvim
+      comment-nvim
+      conform-nvim
+      fidget-nvim
+      friendly-snippets
+      gitsigns-nvim
+      harpoon2
+      indent-blankline-nvim
+      lspkind-nvim
+      lualine-nvim
+      luasnip
+      mini-nvim
+      neodev-nvim
+      nui-nvim
+      nvim-cmp
+      nvim-dap
+      nvim-dap-go
+      nvim-dap-ui
+      nvim-dap-virtual-text
+      nvim-dbee
+      nvim-lint
+      nvim-lspconfig
+      nvim-nio
+      nvim-treesitter-context
+      nvim-treesitter.withAllGrammars
+      nvim-web-devicons # figure out how to enable nerd
+      oil-nvim
+      plenary-nvim
+      SchemaStore-nvim
+      sqlite-lua
+      telescope-fzf-native-nvim
+      telescope-nvim
+      telescope-ui-select-nvim
+      todo-comments-nvim
+      trouble-nvim
+      vim-dadbod
+      vim-dadbod-completion
+      vim-dadbod-ui
+      vim-just
+      vim-sleuth
+      which-key-nvim
 
-    cmp-buffer
-    cmp_luasnip
-    cmp-nvim-lsp
-    cmp-path
-    colorbuddy-nvim
-    comment-nvim
-    conform-nvim
-    fidget-nvim
-    friendly-snippets
-    gitsigns-nvim
-    harpoon2
-    indent-blankline-nvim
-    lspkind-nvim
-    lualine-nvim
-    luasnip
-    mini-nvim
-    neodev-nvim
-    nui-nvim
-    nvim-cmp
-    nvim-dap
-    nvim-dap-go
-    nvim-dap-ui
-    nvim-dap-virtual-text
-    nvim-dbee
-    nvim-lint
-    nvim-lspconfig
-    nvim-nio
-    nvim-treesitter-context
-    nvim-treesitter.withAllGrammars
-    nvim-web-devicons # figure out how to enable nerd
-    oil-nvim
-    plenary-nvim
-    SchemaStore-nvim
-    sqlite-lua
-    telescope-fzf-native-nvim
-    telescope-nvim
-    telescope-ui-select-nvim
-    todo-comments-nvim
-    trouble-nvim
-    vim-dadbod
-    vim-dadbod-completion
-    vim-dadbod-ui
-    vim-just
-    vim-sleuth
-    which-key-nvim
-
-    # configuration
-    vndrew-nvim
-  ];
+      # configuration
+      vndrew-nvim
+    ];
 
   mkExtraPackages = {system}: let
     inherit (pkgs) nodePackages ocamlPackages python3Packages;
@@ -107,16 +103,15 @@ in rec {
     };
   in [
     # language servers
-    #nodePackages."bash-language-server"
+    nodePackages."bash-language-server"
+    nodePackages."dockerfile-language-server-nodejs"
+    nodePackages."vscode-langservers-extracted"
+    nodePackages."yaml-language-server"
     #nodePackages."diagnostic-languageserver"
-    #nodePackages."dockerfile-language-server-nodejs"
     #nodePackages."pyright"
-    #nodePackages."vscode-langservers-extracted"
-    #nodePackages."yaml-language-server"
-    #pkgs.gopls
     pkgs.lua-language-server
     pkgs.nil
-    #luajitPackages.lua-lsp
+    #pkgs.gopls
 
     # formatters
     pkgs.alejandra

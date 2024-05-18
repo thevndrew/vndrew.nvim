@@ -1,5 +1,5 @@
-local treesitter = require 'nvim-treesitter.configs'
-local treesitter_context = require 'treesitter-context'
+local treesitter = require "nvim-treesitter.configs"
+local treesitter_context = require "treesitter-context"
 
 -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
@@ -9,23 +9,47 @@ local treesitter_context = require 'treesitter-context'
 --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+local M = {}
 
-treesitter.setup {
-  auto_install = false,
-  ensure_installed = {},
-  highlight = {
-    enable = true,
-    -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-    --  If you are experiencing weird indenting issues, add the language to
-    --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-    additional_vim_regex_highlighting = { 'ruby' },
-  },
-  ignore_install = {},
-  indent = { enable = true, disable = { 'ruby' } },
-  modules = {},
-  sync_install = false,
-}
+M.setup = function()
+  local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
 
-treesitter_context.setup()
+  treesitter.setup {
+    auto_install = false,
+    ensure_installed = {},
+    highlight = {
+      enable = true,
+      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+      --  If you are experiencing weird indenting issues, add the language to
+      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+      additional_vim_regex_highlighting = { "ruby" },
+    },
+    ignore_install = {},
+    indent = { enable = true, disable = { "ruby" } },
+    modules = {},
+    sync_install = false,
+  }
 
--- vim: ts=2 sts=2 sw=2 et
+  treesitter_context.setup()
+
+  local syntax_on = {
+    elixir = true,
+  }
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = group,
+    callback = function(args)
+      local bufnr = args.buf
+      local ft = vim.bo[bufnr].filetype
+      pcall(vim.treesitter.start)
+
+      if syntax_on[ft] then
+        vim.bo[bufnr].syntax = "on"
+      end
+    end,
+  })
+end
+
+M.setup()
+
+return M
