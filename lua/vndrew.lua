@@ -4,8 +4,7 @@ local function init()
   -- vim.g.mapleader = ","
   -- vim.g.maplocalleader = ","
 
-  -- [[ Configure plugins ]]
-  require("utils").glob_require "plugins"
+  require "plugins"
 end
 
 return {
