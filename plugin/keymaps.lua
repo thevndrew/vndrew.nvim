@@ -24,12 +24,12 @@ set("n", "<CR>", function()
   else
     return "<CR>"
   end
-end, { expr = true })
+end, { expr = true, desc = "Toggle hlsearch" })
 
 -- Normally these are not good mappings, but I have left/right on my thumb
 -- cluster, so navigating tabs is quite easy this way.
-set("n", "<left>", "gT")
-set("n", "<right>", "gt")
+set("n", "<left>", "gT", { desc = "[G]oto left [T]ab" })
+set("n", "<right>", "gt", { desc = "[G]oto right [t]ab" })
 
 -- There are builtin keymaps for this now, but I like that it shows
 -- the float when I navigate to the error - so I override them.
@@ -39,10 +39,10 @@ set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rr
 set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- These mappings control the size of splits (height/width)
-set("n", "<M-,>", "<c-w>5<")
-set("n", "<M-.>", "<c-w>5>")
-set("n", "<M-t>", "<C-W>+")
-set("n", "<M-s>", "<C-W>-")
+set("n", "<M-,>", "<c-w>5<", { desc = "Increase left split" })
+set("n", "<M-.>", "<c-w>5>", { desc = "Increase right split" })
+set("n", "<M-t>", "<C-W>+", { desc = "Increse bottom split" })
+set("n", "<M-s>", "<C-W>-", { desc = "Increse top split" })
 
 set("n", "<M-j>", function()
   if vim.opt.diff:get() then
@@ -50,7 +50,7 @@ set("n", "<M-j>", function()
   else
     vim.cmd [[m .+1<CR>==]]
   end
-end)
+end, { desc = "Move line down" })
 
 set("n", "<M-k>", function()
   if vim.opt.diff:get() then
@@ -58,7 +58,7 @@ set("n", "<M-k>", function()
   else
     vim.cmd [[m .-2<CR>==]]
   end
-end)
+end, { desc = "Move up down" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
