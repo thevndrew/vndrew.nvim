@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     express_line-nvim = {
       url = "github:tjdevries/express_line.nvim";
       flake = false;
