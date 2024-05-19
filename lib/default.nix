@@ -24,13 +24,7 @@ in rec {
   mkNeovimPlugins = {system}: let
     inherit (pkgs) vimPlugins;
     inherit (pkgs.vimUtils) buildVimPlugin;
-    pkgs = import inputs.nixpkgs {
-      inherit system;
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
-      config.allowUnfree = true;
-    };
+    pkgs = legacyPackages.${system};
     vndrew-nvim = mkVimPlugin {inherit system;};
 
     express_line-nvim = buildVimPlugin {
@@ -108,9 +102,6 @@ in rec {
     inherit (pkgs) nodePackages ocamlPackages python3Packages;
     pkgs = import inputs.nixpkgs {
       inherit system;
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
       config.allowUnfree = true;
     };
   in [
@@ -140,9 +131,6 @@ in rec {
     inherit (pkgs) lua54Packages;
     pkgs = import inputs.nixpkgs {
       inherit system;
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
       config.allowUnfree = true;
     };
   in [
