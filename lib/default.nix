@@ -90,6 +90,7 @@ in rec {
       vim-dadbod
       vim-dadbod-completion
       vim-dadbod-ui
+      vim-fugitive
       vim-just
       vim-sleuth
       which-key-nvim
