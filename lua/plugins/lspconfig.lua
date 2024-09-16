@@ -169,6 +169,23 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = { '*' },
+--   command = [[%s/\s\+$//e]],
+-- })
+
+-- Same as the previous one, but saves cursor position
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  callback = function()
+    local save_cursor = vim.fn.getpos '.'
+    pcall(function()
+      vim.cmd [[%s/\s\+$//e]]
+    end)
+    vim.fn.setpos('.', save_cursor)
+  end,
+})
+
 -- LSP servers and clients are able to communicate to each other what features they support.
 --  By default, Neovim doesn't support everything that is in the LSP specification.
 --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
