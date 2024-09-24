@@ -358,6 +358,7 @@
           name = defaultPackageName;
           packages = [(nixCatsBuilder defaultPackageName)];
           inputsFrom = [];
+          nativeBuildInputs = with pkgs; [stylua nil just];
           shellHook = ''
           '';
         };
