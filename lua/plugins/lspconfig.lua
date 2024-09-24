@@ -217,19 +217,20 @@ local servers = {
   -- tsserver = {},
   --
 
-  bashls = true,
-  gopls = true,
-  rust_analyzer = true,
-  svelte = true,
-  templ = true,
-  cssls = true,
+  bashls = 'bash-language-server',
+  gopls = 'gopls',
+  rust_analyzer = 'rust-analyzer',
+  svelte = 'svelteserver',
+  templ = 'templ',
+  cssls = 'vscode-css-language-server',
 
   -- Probably want to disable formatting for this lang server
-  tsserver = true,
+  ts_ls = 'typescript-language-server',
 
-  pyright = true,
+  pyright = 'pyright-langserver',
 
   lua_ls = {
+    bin_name = 'lua-language-server',
     -- cmd = {...},
     -- filetypes = { ...},
     -- capabilities = {},
@@ -245,6 +246,7 @@ local servers = {
   },
 
   nil_ls = {
+    bin_name = 'nil',
     autostart = true,
     cmd = { 'nil' },
     settings = {
@@ -257,6 +259,7 @@ local servers = {
   },
 
   jsonls = {
+    bin_name = 'vscode-json-language-server',
     settings = {
       json = {
         schemas = require('schemastore').json.schemas(),
@@ -266,6 +269,7 @@ local servers = {
   },
 
   yamlls = {
+    bin_name = 'yaml-language-server',
     settings = {
       yaml = {
         schemaStore = {
@@ -278,6 +282,7 @@ local servers = {
   },
 
   ocamllsp = {
+    bin_name = 'ocamllsp',
     manual_install = true,
     settings = {
       codelens = { enable = true },
@@ -292,6 +297,7 @@ local servers = {
   },
 
   clangd = {
+    bin_name = 'clangd',
     init_options = { clangdFileStatus = true },
     filetypes = { 'c' },
   },
@@ -303,14 +309,22 @@ local lspconfig = require 'lspconfig'
 -- by the server configuration above. Useful when disabling
 -- certain features of an LSP (for example, turning off formatting for tsserver)
 for name, config in pairs(servers) do
-  if config == true then
-    config = {}
+  if type(config) == 'string' then
+    config = { bin_name = config }
   end
+
+  -- if LSP executable not present skip configuration
+  if vim.fn.executable(config.bin_name) == 0 then
+    goto continue
+  end
+
   config = vim.tbl_deep_extend('force', {}, {
     capabilities = capabilities,
   }, config)
 
   lspconfig[name].setup(config)
+
+  ::continue::
 end
 
 -- vim: ts=2 sts=2 sw=2 et
