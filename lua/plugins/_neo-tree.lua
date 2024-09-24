@@ -2,17 +2,17 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 --
 require('neo-tree').setup {
-  filesystem = {
-    window = {
-      mappings = {
-        ['\\'] = 'close_window',
-      },
+    filesystem = {
+        window = {
+            mappings = {
+                ['\\'] = 'close_window',
+            },
+        },
     },
-  },
 }
 
 local map = function(keys, func, desc)
-  vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'Neotree: ' .. desc })
+    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'Neotree: ' .. desc })
 end
 
 -- Jump to the definition of the word under your cursor.
