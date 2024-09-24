@@ -147,18 +147,10 @@
           nodePackages."dockerfile-language-server-nodejs"
           nodePackages."vscode-langservers-extracted"
           nodePackages."yaml-language-server"
-          #nodePackages."diagnostic-languageserver"
-          #nodePackages."pyright"
-          lua-language-server
           nil
-          #gopls
 
           # formatters
-          alejandra
-          stylua
-          #gofumpt
-          #golines
-          #python3Packages.black
+          alejandra # nix
 
           # telescope-smart-history dep
           pkgs.sqlite
@@ -358,7 +350,7 @@
           name = defaultPackageName;
           packages = [(nixCatsBuilder defaultPackageName)];
           inputsFrom = [];
-          nativeBuildInputs = with pkgs; [stylua nil just];
+          nativeBuildInputs = with pkgs; [lua-language-server stylua nil just];
           shellHook = ''
           '';
         };
