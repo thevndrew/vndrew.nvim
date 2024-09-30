@@ -1,1 +1,4 @@
+tags
 .direnv
+.luarc.json
+/result
