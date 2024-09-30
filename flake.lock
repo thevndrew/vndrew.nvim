@@ -249,12 +249,29 @@
         "type": "github"
       }
     },
+    "render-markdown-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727645439,
+        "narHash": "sha256-bZXsnXx9U0C+b2kgpXk+cPK8inVt4dmVEca+/tDWxZE=",
+        "owner": "MeanderingProgrammer",
+        "repo": "render-markdown.nvim",
+        "rev": "ebfea32e3b3d538a6e0c8e12da911d632deb1d8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MeanderingProgrammer",
+        "repo": "render-markdown.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "express_line-nvim": "express_line-nvim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_2",
+        "render-markdown-nvim": "render-markdown-nvim",
         "telescope-smart-history-nvim": "telescope-smart-history-nvim"
       }
     },

@@ -31,6 +31,11 @@
       flake = false;
     };
 
+    render-markdown-nvim = {
+      url = "github:MeanderingProgrammer/render-markdown.nvim";
+      flake = false;
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
@@ -122,6 +127,13 @@
         src = inputs.telescope-smart-history-nvim;
         meta.homepage = "https://github.com/nvim-telescope/telescope-smart-history.nvim";
       };
+
+      render-markdown-nvim = buildVimPlugin {
+        pname = "render-markdown.nvim";
+        version = "2024-09-29";
+        src = inputs.render-markdown-nvim;
+        meta.homepage = "https://github.com/MeanderingProgrammer/render-markdown.nvim";
+      };
     in {
       # to define and use a new category, simply add a new list to a set here,
       # and later, you will include categoryname = true; in the set you
@@ -211,6 +223,7 @@
           nvim-web-devicons
           oil-nvim
           plenary-nvim
+          render-markdown-nvim
           telescope-fzf-native-nvim
           telescope-nvim
           telescope-smart-history-nvim
