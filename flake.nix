@@ -325,7 +325,6 @@
           # IMPORTANT:
           # your alias may not conflict with your other packages.
           aliases = ["vim"];
-          neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
         };
         # and a set of categories that you want
         # (and other information to pass to lua)
@@ -359,16 +358,31 @@
         };
       };
 
-      # plain non-nerd icon vim
-      pvim = {pkgs, ...}: {
-        # they contain a settings set defined above
-        # see :help nixCats.flake.outputs.settings
+      nvim-nightly = {pkgs, ...}: {
         settings = {
           wrapRc = true;
+          aliases = ["vim"];
           neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
         };
-        # and a set of categories that you want
-        # (and other information to pass to lua)
+        categories = {
+          general = true;
+          gitPlugins = true;
+          customPlugins = true;
+          test = true;
+
+          kickstart-debug = true;
+          kickstart-lint = true;
+          kickstart-indent_line = true;
+          kickstart-gitsigns = true;
+          have_nerd_font = true;
+        };
+      };
+
+      # plain non-nerd icon vim
+      pvim = {pkgs, ...}: {
+        settings = {
+          wrapRc = true;
+        };
         categories = {
           general = true;
           gitPlugins = true;
