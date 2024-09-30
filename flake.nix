@@ -331,8 +331,7 @@
           # but we can still send the info from nix to lua that we want it!
           kickstart-gitsigns = true;
 
-          # we can pass whatever we want actually.
-          have_nerd_font = false;
+          have_nerd_font = true;
 
           example = {
             youCan = "add more than just booleans";
@@ -344,6 +343,30 @@
               "and type :NixCats to see the categories set in nvim"
             ];
           };
+        };
+      };
+
+      # plain non-nerd icon vim
+      pvim = {pkgs, ...}: {
+        # they contain a settings set defined above
+        # see :help nixCats.flake.outputs.settings
+        settings = {
+          wrapRc = true;
+          neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+        };
+        # and a set of categories that you want
+        # (and other information to pass to lua)
+        categories = {
+          general = true;
+          gitPlugins = true;
+          customPlugins = true;
+          test = true;
+
+          kickstart-debug = true;
+          kickstart-lint = true;
+          kickstart-indent_line = true;
+          kickstart-gitsigns = true;
+          have_nerd_font = false;
         };
       };
     };
