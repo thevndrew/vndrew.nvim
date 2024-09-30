@@ -214,6 +214,7 @@
           lazydev-nvim
           lazy-nvim
           lspkind-nvim
+          lsp_lines-nvim
           # lualine-nvim
           luasnip
           mini-nvim
