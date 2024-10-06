@@ -44,6 +44,18 @@ return {
             },
             -- kickstart.nvim was still on neodev. lazydev is the new version of neodev
         },
+        keys = {
+            {
+                '<leader>td',
+                function()
+                    local state = not vim.diagnostic.is_enabled()
+                    print('Toggling diagnostics ' .. (state and 'On' or 'Off'))
+                    vim.diagnostic.enable(state)
+                end,
+                mode = 'n',
+                desc = 'Toggle LSP diagnostics',
+            },
+        },
         config = function()
             -- Brief aside: **What is LSP?**
             --
