@@ -1,7 +1,7 @@
 return {
     {
         'kndndrj/nvim-dbee',
-        enabled = false,
+        enabled = require('nixCatsUtils').enableForCategory 'debee',
         dependencies = { 'MunifTanjim/nui.nvim' },
         build = function()
             if not require('nixCatsUtils').isNixCats then

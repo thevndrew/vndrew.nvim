@@ -199,12 +199,6 @@
           vim-dadbod
           vim-dadbod-completion
           vim-dadbod-ui
-          nvim-debee
-          nui-nvim
-          # {
-          #   plugin = sqlite-lua;
-          #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-          # }
 
           cmp-buffer
           cmp_luasnip
@@ -251,6 +245,14 @@
           #     lua
           #   ]
           # ))
+        ];
+        debee = [
+          nvim-debee
+          nui-nvim
+          # {
+          #   plugin = sqlite-lua;
+          #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+          # }
         ];
         kickstart-debug = [
           nvim-dap
