@@ -249,6 +249,22 @@
         "type": "github"
       }
     },
+    "nvim-dbee": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722015887,
+        "narHash": "sha256-AOime4vG0NFcUvsd9Iw5SxR7WaeCsoCRU6h5+vSkt4M=",
+        "owner": "kndndrj",
+        "repo": "nvim-dbee",
+        "rev": "21d2cc0844a16262bb6ea93ab3d0a0f20bd87853",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kndndrj",
+        "repo": "nvim-dbee",
+        "type": "github"
+      }
+    },
     "render-markdown-nvim": {
       "flake": false,
       "locked": {
@@ -271,6 +287,7 @@
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_2",
+        "nvim-dbee": "nvim-dbee",
         "render-markdown-nvim": "render-markdown-nvim",
         "telescope-smart-history-nvim": "telescope-smart-history-nvim"
       }

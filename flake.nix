@@ -40,6 +40,11 @@
       url = "github:nix-community/neovim-nightly-overlay";
     };
 
+    nvim-dbee = {
+      url = "github:kndndrj/nvim-dbee";
+      flake = false;
+    };
+
     # see :help nixCats.flake.inputs
     # If you want your plugin to be loaded by the standard overlay,
     # i.e. if it wasnt on nixpkgs, but doesnt have an extra build step.
@@ -134,6 +139,8 @@
         src = inputs.render-markdown-nvim;
         meta.homepage = "https://github.com/MeanderingProgrammer/render-markdown.nvim";
       };
+
+      nvim-debee = pkgs.callPackage ./pkgs/nvim-debee {inherit inputs;};
     in {
       # to define and use a new category, simply add a new list to a set here,
       # and later, you will include categoryname = true; in the set you
@@ -189,14 +196,15 @@
       # This is for plugins that will load at startup without using packadd:
       startupPlugins = with pkgs.vimPlugins; {
         general = [
-          #nvim-dbee
+          vim-dadbod
+          vim-dadbod-completion
+          vim-dadbod-ui
+          nvim-debee
+          nui-nvim
           # {
           #   plugin = sqlite-lua;
           #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
           # }
-          # vim-dadbod
-          # vim-dadbod-completion
-          # vim-dadbod-ui
 
           cmp-buffer
           cmp_luasnip
