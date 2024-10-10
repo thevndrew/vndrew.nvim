@@ -196,6 +196,11 @@
       # This is for plugins that will load at startup without using packadd:
       startupPlugins = with pkgs.vimPlugins; {
         general = [
+          # {
+          #   plugin = sqlite-lua;
+          #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+          # }
+
           vim-dadbod
           vim-dadbod-completion
           vim-dadbod-ui
@@ -249,10 +254,6 @@
         debee = [
           nvim-debee
           nui-nvim
-          # {
-          #   plugin = sqlite-lua;
-          #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-          # }
         ];
         kickstart-debug = [
           nvim-dap
