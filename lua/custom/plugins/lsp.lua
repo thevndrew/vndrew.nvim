@@ -44,18 +44,6 @@ return {
             },
             -- kickstart.nvim was still on neodev. lazydev is the new version of neodev
         },
-        keys = {
-            {
-                '<leader>td',
-                function()
-                    local state = not vim.diagnostic.is_enabled()
-                    print('Toggling diagnostics ' .. (state and 'On' or 'Off'))
-                    vim.diagnostic.enable(state)
-                end,
-                mode = 'n',
-                desc = 'Toggle LSP diagnostics',
-            },
-        },
         config = function()
             -- Brief aside: **What is LSP?**
             --
@@ -97,6 +85,12 @@ return {
                     local map = function(keys, func, desc)
                         vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
+
+                    map('<leader>td', function()
+                        local state = not vim.diagnostic.is_enabled()
+                        print('Toggling diagnostics ' .. (state and 'On' or 'Off'))
+                        vim.diagnostic.enable(state)
+                    end, 'Toggle LSP diagnostics')
 
                     -- Jump to the definition of the word under your cursor.
                     --  This is where a variable was first declared, or where a function is defined, etc.
