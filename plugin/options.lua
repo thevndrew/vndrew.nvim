@@ -7,6 +7,9 @@ local opt = vim.opt
 
 ----- Interesting Options -----
 
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 -- You have to turn this one on :)
 opt.inccommand = 'split'
 

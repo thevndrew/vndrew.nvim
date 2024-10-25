@@ -18,7 +18,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixCats.url = "github:BirdeeHub/nixCats-nvim?dir=nix";
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
     # nixCats.inputs.nixpkgs.follows = "nixpkgs";
 
     express_line-nvim = {
@@ -47,7 +47,7 @@
 
     # see :help nixCats.flake.inputs
     # If you want your plugin to be loaded by the standard overlay,
-    # i.e. if it wasnt on nixpkgs, but doesnt have an extra build step.
+    # i.e. if it wasnt on nixpkgs, but doesn't have an extra build step.
     # Then you should name it "plugins-something"
     # If you wish to define a custom build step not handled by nixpkgs,
     # then you should name it in a different format, and deal with that in the
@@ -175,9 +175,8 @@
           nodePackages."yaml-language-server"
           # lua-language-server
           # stylua
-          nil
           nix-doc
-          # nixd
+          nixd
 
           # formatters
           alejandra # nix
@@ -196,11 +195,6 @@
       # This is for plugins that will load at startup without using packadd:
       startupPlugins = with pkgs.vimPlugins; {
         general = [
-          # {
-          #   plugin = sqlite-lua;
-          #   config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-          # }
-
           vim-dadbod
           vim-dadbod-completion
           vim-dadbod-ui
@@ -273,7 +267,7 @@
       # not loaded automatically at startup.
       # use with packadd and an autocommand in config to achieve lazy loading
       # NOTE: this template is using lazy.nvim so, which list you put them in is irrelevant.
-      # startupPlugins or optionalPlugins, it doesnt matter, lazy.nvim does the loading.
+      # startupPlugins or optionalPlugins, it doesn't matter, lazy.nvim does the loading.
       # I just put them all in startupPlugins. I could have put them all in here instead.
       optionalPlugins = {};
 
@@ -351,7 +345,7 @@
           kickstart-indent_line = true;
 
           # this kickstart extra didnt require any extra plugins
-          # so it doesnt have a category above.
+          # so it doesn't have a category above.
           # but we can still send the info from nix to lua that we want it!
           kickstart-gitsigns = true;
 
@@ -440,9 +434,12 @@
           name = defaultPackageName;
           packages = [defaultPackage];
           inputsFrom = [];
-          nativeBuildInputs = with pkgs; [lua-language-server stylua nil just];
+          nativeBuildInputs = with pkgs; [lua-language-server stylua nixd just];
           shellHook = ''
+            echo "vndrew.nvim" | ${pkgs.figlet}/bin/figlet | ${pkgs.boxes}/bin/boxes -d vim-box
           '';
+          NIX_PATH = "nixpkgs=${inputs.nixpkgs}";
+          NIX_DEBUG = 7;
         };
       };
     })

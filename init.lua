@@ -15,6 +15,19 @@ require('nixCatsUtils').setup {
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Python-like string formatting with %
+getmetatable('').__mod = function(a, b)
+    if not b then
+        return a
+    elseif type(b) == 'table' then
+        return string.format(a, unpack(b))
+    else
+        return string.format(a, b)
+    end
+end
+-- print('%5.2f' % math.pi)
+-- print('%-10.10s %04d' % { 'test', 123 })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 -- NOTE: nixCats: we asked nix if we have it instead of setting it here.
 -- because nix is more likely to know if we have a nerd font or not.

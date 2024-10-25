@@ -204,6 +204,15 @@ return {
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- servers.tsserver = {},
             --
+            local function get_hostname()
+                local f = io.popen 'hostname'
+                local hostname = f:read '*a' or ''
+                f:close()
+                hostname = string.gsub(hostname, '\n$', '')
+                return hostname
+            end
+
+            local flake_path = vim.fn.expand '$HOME/nix-config'
             local servers = {
                 -- clangd = {},
                 -- gopls = {},
@@ -244,6 +253,29 @@ return {
                                 -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                                 disable = { 'missing-fields' },
                             },
+                        },
+                    },
+                },
+
+                nixd = {
+                    bin_name = 'nixd',
+                    cmd = { 'nixd' },
+                    settings = {
+                        nixd = {
+                            nixpkgs = {
+                                expr = 'import <nixpkgs> { }',
+                            },
+                            formatting = {
+                                command = { 'alejandra' }, -- or nixfmt or nixpkgs-fmt
+                            },
+                            options = require('nixCatsUtils').lazyAdd({}, {
+                                nixos = {
+                                    expr = '(builtins.getFlake "' .. flake_path .. '").nixosConfigurations.' .. get_hostname() .. '.options',
+                                },
+                                home_manager = {
+                                    expr = '(builtins.getFlake "' .. flake_path .. '").homeConfigurations.' .. vim.env.USER .. '.options',
+                                },
+                            }),
                         },
                     },
                 },
