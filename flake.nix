@@ -119,12 +119,12 @@
     } @ packageDef: let
       inherit (pkgs.vimUtils) buildVimPlugin;
 
-      express_line-nvim = buildVimPlugin {
-        pname = "express_line.nvim";
-        version = "2024-05-16";
-        src = inputs.express_line-nvim;
-        meta.homepage = "https://github.com/tjdevries/express_line.nvim";
-      };
+      # express_line-nvim = buildVimPlugin {
+      #   pname = "express_line.nvim";
+      #   version = "2024-05-16";
+      #   src = inputs.express_line-nvim;
+      #   meta.homepage = "https://github.com/tjdevries/express_line.nvim";
+      # };
 
       telescope-smart-history-nvim = buildVimPlugin {
         pname = "telescope-smart-history.nvim";
@@ -206,7 +206,6 @@
           colorbuddy-nvim
           comment-nvim
           conform-nvim
-          express_line-nvim
           fidget-nvim
           friendly-snippets
           gitsigns-nvim
